@@ -1,0 +1,127 @@
+import pandas as pd
+import re
+import sys
+
+def clean_and_process_data(csv_path, keywords_path, output_path, sentences_to_remove):
+    """
+    Cleaning + paragraphing + keyword filtering pipeline.
+    - Title: cleaned, paragraph-split, highlighted (NO filtering).
+    - Content: cleaned, paragraph-split, THEN filtered by keywords.
+    """
+
+    # --- 1. Load Keywords ---
+    try:
+        with open(keywords_path, 'r', encoding='utf-8') as f:
+            keywords_raw = [line.split(',')[0].strip().strip('"') for line in f.readlines()[1:]]
+            keywords = [k.lower() for k in keywords_raw if k]
+        print(f"Successfully loaded {len(keywords)} keywords.")
+    except FileNotFoundError:
+        print(f"Error: The keyword file was not found at '{keywords_path}'")
+        sys.exit(1)
+
+    # --- 2. Load CSV and Apply Cleaning ---
+    try:
+        df = pd.read_csv(csv_path)
+        print("Successfully loaded the CSV file.")
+
+        # Drop unnecessary columns if present
+        df_cleaned = df.drop(columns=['URL', 'Status', 'Timestamp', 'Word Count'], errors='ignore')
+
+        def clean_and_paragraph_text(text):
+            if not isinstance(text, str):
+                return []
+
+            # Remove links, brackets, non-alphabetic chars
+            text = re.sub(r'http\S+|www.\S+', '', text, flags=re.MULTILINE)
+            text = re.sub(r'\[.*?\]', '', text)
+            text = re.sub(r'[^a-zA-Z\s.,!?\'"-]', '', text)
+            text = " ".join(text.split())
+
+            # Remove custom sentences
+            for sentence in sentences_to_remove:
+                text = re.sub(re.escape(sentence), '', text, flags=re.IGNORECASE)
+
+            # Normalize punctuation
+            text = re.sub(r'([.!?])\1+', r'\1', text)
+
+            # Split into sentences/paragraphs
+            paragraphs = re.split(r'(?<=[.!?])\s+|\b(?:yesterday|today)\b', text, flags=re.IGNORECASE)
+            paragraphs = [p.strip() for p in paragraphs if p.strip()]
+
+            return paragraphs
+
+        print("Applying cleaning and paragraph formatting...")
+        df_cleaned['Content'] = df_cleaned['Content'].apply(clean_and_paragraph_text)
+        df_cleaned['Title'] = df_cleaned['Title'].apply(clean_and_paragraph_text)
+
+    except FileNotFoundError:
+        print(f"Error: The CSV file was not found at '{csv_path}'")
+        sys.exit(1)
+
+    # --- 3. Define Filtering and Highlighting ---
+    def contains_keyword(text):
+        if not isinstance(text, str):
+            return False
+        for keyword in keywords:
+            # \b ensures full word match (case-insensitive)
+            if re.search(rf'\b{re.escape(keyword)}\b', text, re.IGNORECASE):
+                return True
+        return False
+
+    def filter_paragraphs_by_keyword(paragraphs):
+        if not isinstance(paragraphs, list):
+            return []
+        return [p for p in paragraphs if contains_keyword(p)]
+
+    def highlight_keywords(text, keyword_list):
+        if not isinstance(text, str):
+            return ""
+        sorted_keywords = sorted(keyword_list, key=len, reverse=True)
+        for keyword in sorted_keywords:
+            pattern = re.compile(f'\\b({re.escape(keyword)})\\b', re.IGNORECASE)
+            text = pattern.sub(r'**\1**', text)
+        return text
+
+    # --- 4. Save the Final Output ---
+    try:
+        with open(output_path, 'w', encoding='utf-8') as f:
+            final_article_count = 0
+            for index, row in df_cleaned.iterrows():
+                # Titles: cleaned + highlighted (NO filtering)
+                highlighted_title = "\n\n".join(
+                    [highlight_keywords(s, keywords) for s in row['Title']]
+                )
+
+                # Content: cleaned → paragraph split → filter → highlight
+                filtered_content = filter_paragraphs_by_keyword(row['Content'])
+                highlighted_content = "\n\n".join(
+                    [highlight_keywords(s, keywords) for s in filtered_content]
+                )
+
+                if highlighted_title or highlighted_content:
+                    final_article_count += 1
+                    f.write(f"Title:\n{highlighted_title}\n\n")
+                    f.write(f"Content:\n{highlighted_content}\n")
+                    f.write("\n" + "="*80 + "\n\n")
+
+            if final_article_count == 0:
+                f.write("No headlines or content matched the filtering criteria after all cleaning.")
+
+            print(f"Final filtering resulted in {final_article_count} relevant articles.")
+            print(f"Successfully created the final formatted output file at '{output_path}'")
+    except Exception as e:
+        print(f"An error occurred while writing the final output file: {e}")
+
+
+# --- Main Execution ---
+if __name__ == '__main__':
+    CSV_INPUT_FILE = 'crawl_results_2025-09-06T17-28-48.csv'
+    KEYWORD_FILE = 'market Keyword.txt'
+    FINAL_OUTPUT_FILE = 'comprehensive_final_output.doc'
+
+    CUSTOM_SENTENCES_TO_REMOVE = [
+        "Continue with Apple Breaking News Market Overview Contribute",
+        "Already a member?"
+    ]
+
+    clean_and_process_data(CSV_INPUT_FILE, KEYWORD_FILE, FINAL_OUTPUT_FILE, CUSTOM_SENTENCES_TO_REMOVE)
