@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀🤖 Crawl4AI Web Crawler</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        .form-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-info {
+            background: linear-gradient(45deg, #17a2b8, #21c8de);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+        }
+
+        .btn-info:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+        }
+        
+        .btn-warning {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+        }
+        
+        .progress-container {
+            margin: 2rem 0;
+        }
+        
+        .progress {
+            height: 25px;
+            border-radius: 15px;
+            background: #e9ecef;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 15px;
+            transition: width 0.5s ease;
+        }
+        
+        .status-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #667eea;
+        }
+        
+        .results-container {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .result-item {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #28a745;
+            transition: transform 0.2s ease;
+        }
+        
+        .result-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .result-item.error {
+            border-left-color: #dc3545;
+        }
+        
+        .result-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-url {
+            color: #667eea;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            word-break: break-all;
+        }
+        
+        .result-content {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            max-height: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .result-content.expanded {
+            max-height: none;
+        }
+        
+        .expand-btn {
+            background: none;
+            border: none;
+            color: #667eea;
+            font-size: 0.8rem;
+            cursor: pointer;
+            padding: 0;
+            margin-top: 0.5rem;
+        }
+        
+        .cache-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .cache-item {
+            background: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid #17a2b8;
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .stats-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stats-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .alert {
+            border-radius: 10px;
+            border: none;
+        }
+        
+        .alert-success {
+            background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+            color: white;
+        }
+        
+        .alert-danger {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            color: white;
+        }
+        
+        .alert-info {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-container">
+            <!-- Header -->
+            <div class="header">
+                <h1><i class="fas fa-spider"></i> Crawl4AI Web Crawler</h1>
+                <p>Multi-URL crawling with intelligent content extraction and caching</p>
+            </div>
+
+            <!-- Crawl Form -->
+            <div class="form-container">
+                <form id="crawlForm">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label for="homepageUrl" class="form-label">
+                                    <i class="fas fa-globe"></i> Homepage URL
+                                </label>
+                                <input type="url" class="form-control form-control-lg" id="homepageUrl" 
+                                       placeholder="https://example.com" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="maxPages" class="form-label">
+                                    <i class="fas fa-list-ol"></i> Max Pages
+                                </label>
+                                <input type="number" class="form-control form-control-lg" id="maxPages" 
+                                       value="30" min="1" max="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg" id="startCrawlBtn">
+                            <i class="fas fa-play"></i> Start Crawling
+                        </button>
+                        <button type="button" class="btn btn-info btn-lg" id="startBatchCrawlBtn">
+                            <i class="fas fa-list-check"></i> Crawl From List
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Progress Section -->
+            <div id="progressSection" style="display: none;">
+                <div class="progress-container">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5><i class="fas fa-tasks"></i> Crawl Progress</h5>
+                        <span id="progressText">0%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <div class="text-center mt-2">
+                        <small id="progressDetails">Page 0 of 0</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Cards -->
+            <div class="row" id="statusCards" style="display: none;">
+                <div class="col-md-4">
+                    <div class="stats-card">
+                        <div class="stats-number" id="totalPages">0</div>
+                        <div class="stats-label">Total Pages</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stats-card">
+                        <div class="stats-number" id="successfulPages">0</div>
+                        <div class="stats-label">Successful</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stats-card">
+                        <div class="stats-number" id="errorPages">0</div>
+                        <div class="stats-label">Errors</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" style="display: none;">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4><i class="fas fa-list"></i> Crawl Results</h4>
+                    <div>
+                        <button class="btn btn-success me-2" id="downloadCsvBtn">
+                            <i class="fas fa-download"></i> Download CSV
+                        </button>
+                        <button class="btn btn-warning" id="clearResultsBtn">
+                            <i class="fas fa-trash"></i> Clear Results
+                        </button>
+                    </div>
+                </div>
+                <div class="results-container" id="resultsContainer"></div>
+            </div>
+
+            <!-- Cache Section -->
+            <div class="cache-section">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5><i class="fas fa-database"></i> Cache Management</h5>
+                    <button class="btn btn-outline-danger btn-sm" id="clearCacheBtn">
+                        <i class="fas fa-trash"></i> Clear All Cache
+                    </button>
+                </div>
+                <div id="cacheList">
+                    <p class="text-muted">No cached results found.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alerts Container -->
+    <div id="alertsContainer" style="position: fixed; top: 20px; right: 20px; z-index: 1050;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        class WebCrawler {
+            constructor() {
+                this.isRunning = false;
+                this.results = [];
+                this.initEventListeners();
+                this.loadCacheList();
+                this.startStatusPolling();
+            }
+
+            initEventListeners() {
+                document.getElementById('crawlForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.startCrawl();
+                });
+
+                document.getElementById('downloadCsvBtn').addEventListener('click', () => {
+                    this.downloadCsv();
+                });
+
+                document.getElementById('clearResultsBtn').addEventListener('click', () => {
+                    this.clearResults();
+                });
+
+                document.getElementById('clearCacheBtn').addEventListener('click', () => {
+                    this.clearCache();
+                });
+
+                document.getElementById('startBatchCrawlBtn').addEventListener('click', () => {
+                    this.startBatchCrawl();
+                });
+            }
+
+            async startCrawl() {
+                const homepageUrl = document.getElementById('homepageUrl').value;
+                const maxPages = parseInt(document.getElementById('maxPages').value);
+
+                if (!homepageUrl) {
+                    this.showAlert('Please enter a homepage URL', 'danger');
+                    return;
+                }
+
+                this.showAlert('Starting crawl...', 'info');
+                this.isRunning = true;
+                this.updateUI();
+
+                try {
+                    const response = await fetch('/api/crawl', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            homepage_url: homepageUrl,
+                            max_pages: maxPages
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        if (data.use_cache) {
+                            this.showAlert('Found cached results!', 'success');
+                            this.loadCachedResults(data.cached_data);
+                        } else {
+                            this.showAlert('Crawl started successfully!', 'success');
+                        }
+                    } else {
+                        this.showAlert(`Error: ${data.error}`, 'danger');
+                        this.isRunning = false;
+                        this.updateUI();
+                    }
+                } catch (error) {
+                    this.showAlert(`Error: ${error.message}`, 'danger');
+                    this.isRunning = false;
+                    this.updateUI();
+                }
+            }
+            
+            async startBatchCrawl() {
+                if (!confirm('This will start crawling all websites from list_of_website.txt. Continue?')) {
+                    return;
+                }
+
+                this.showAlert('Starting batch crawl...', 'info');
+                this.isRunning = true;
+                this.updateUI();
+
+                try {
+                    const response = await fetch('/api/crawl/batch', {
+                        method: 'POST',
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        this.showAlert(`Batch crawl started for ${data.total_websites} websites!`, 'success');
+                    } else {
+                        this.showAlert(`Error: ${data.error}`, 'danger');
+                        this.isRunning = false;
+                        this.updateUI();
+                    }
+                } catch (error) {
+                    this.showAlert(`Error: ${error.message}`, 'danger');
+                    this.isRunning = false;
+                    this.updateUI();
+                }
+            }
+
+            async loadCachedResults(cachedData) {
+                this.results = cachedData.results;
+                this.updateResults();
+                this.showAlert(`Loaded ${this.results.length} cached results`, 'success');
+            }
+
+            async checkStatus() {
+                try {
+                    const response = await fetch('/api/status');
+                    const status = await response.json();
+
+                    if (status.is_running) {
+                        this.updateProgress(status);
+                    } else if (this.isRunning) {
+                        this.isRunning = false;
+                        this.loadResults();
+                    }
+                } catch (error) {
+                    console.error('Error checking status:', error);
+                }
+            }
+
+            async loadResults() {
+                try {
+                    const response = await fetch('/api/results');
+                    const data = await response.json();
+                    this.results = data.results;
+                    this.updateResults();
+                    this.updateStats(data);
+                } catch (error) {
+                    console.error('Error loading results:', error);
+                }
+            }
+
+            updateProgress(status) {
+                const progressSection = document.getElementById('progressSection');
+                const progressBar = document.getElementById('progressBar');
+                const progressText = document.getElementById('progressText');
+                const progressDetails = document.getElementById('progressDetails');
+
+                progressSection.style.display = 'block';
+                progressBar.style.width = `${status.progress}%`;
+                progressText.textContent = `${Math.round(status.progress)}%`;
+                progressDetails.textContent = `Page ${status.current_page} of ${status.total_pages}`;
+            }
+
+            updateResults() {
+                const resultsSection = document.getElementById('resultsSection');
+                const resultsContainer = document.getElementById('resultsContainer');
+
+                if (this.results.length === 0) {
+                    resultsSection.style.display = 'none';
+                    return;
+                }
+
+                resultsSection.style.display = 'block';
+                resultsContainer.innerHTML = '';
+
+                this.results.forEach((result, index) => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = `result-item ${result.status === 'error' ? 'error' : ''}`;
+                    
+                    const content = result.content.length > 200 ? 
+                        result.content.substring(0, 200) + '...' : result.content;
+                    
+                    resultItem.innerHTML = `
+                        <div class="result-title">${result.title}</div>
+                        <div class="result-url">${result.url}</div>
+                        <div class="result-content" id="content-${index}">${content}</div>
+                        ${result.content.length > 200 ? 
+                            `<button class="expand-btn" onclick="toggleContent(${index})">Show more</button>` : ''}
+                        <div class="mt-2">
+                            <span class="badge bg-${result.status === 'success' ? 'success' : 'danger'}">${result.status}</span>
+                            <span class="badge bg-info ms-2">${result.word_count} words</span>
+                            <small class="text-muted ms-2">${new Date(result.timestamp).toLocaleString()}</small>
+                        </div>
+                    `;
+                    
+                    resultsContainer.appendChild(resultItem);
+                });
+            }
+
+            updateStats(data) {
+                document.getElementById('totalPages').textContent = data.total_pages;
+                document.getElementById('successfulPages').textContent = data.successful_pages;
+                document.getElementById('errorPages').textContent = data.error_pages;
+                document.getElementById('statusCards').style.display = 'flex';
+            }
+
+            async downloadCsv() {
+                try {
+                    const response = await fetch('/api/download/csv');
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `crawl_results_${new Date().toISOString().slice(0, 19).replace(/:/g, '-')}.csv`;
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                        document.body.removeChild(a);
+                        this.showAlert('CSV downloaded successfully!', 'success');
+                    } else {
+                        const error = await response.json();
+                        this.showAlert(`Download failed: ${error.error}`, 'danger');
+                    }
+                } catch (error) {
+                    this.showAlert(`Download error: ${error.message}`, 'danger');
+                }
+            }
+
+            clearResults() {
+                this.results = [];
+                this.updateResults();
+                document.getElementById('statusCards').style.display = 'none';
+                document.getElementById('progressSection').style.display = 'none';
+                this.showAlert('Results cleared', 'info');
+            }
+
+            async loadCacheList() {
+                try {
+                    const response = await fetch('/api/cache/list');
+                    const data = await response.json();
+                    this.updateCacheList(data.cache_files);
+                } catch (error) {
+                    console.error('Error loading cache list:', error);
+                }
+            }
+
+            updateCacheList(cacheFiles) {
+                const cacheList = document.getElementById('cacheList');
+                
+                if (cacheFiles.length === 0) {
+                    cacheList.innerHTML = '<p class="text-muted">No cached results found.</p>';
+                    return;
+                }
+
+                cacheList.innerHTML = cacheFiles.map(file => `
+                    <div class="cache-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>${file.filename}</strong><br>
+                                <small class="text-muted">
+                                    Size: ${(file.size / 1024).toFixed(1)} KB | 
+                                    Created: ${new Date(file.created).toLocaleString()}
+                                </small>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm" onclick="loadCacheFile('${file.filename}')">
+                                <i class="fas fa-download"></i> Load
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            async clearCache() {
+                if (!confirm('Are you sure you want to clear all cached results?')) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/api/cache/clear', {
+                        method: 'POST'
+                    });
+                    
+                    if (response.ok) {
+                        this.showAlert('Cache cleared successfully!', 'success');
+                        this.loadCacheList();
+                    } else {
+                        const error = await response.json();
+                        this.showAlert(`Error clearing cache: ${error.error}`, 'danger');
+                    }
+                } catch (error) {
+                    this.showAlert(`Error: ${error.message}`, 'danger');
+                }
+            }
+
+            updateUI() {
+                const startBtn = document.getElementById('startCrawlBtn');
+                const batchBtn = document.getElementById('startBatchCrawlBtn');
+
+                if (this.isRunning) {
+                    startBtn.innerHTML = '<span class="loading-spinner"></span> Crawling...';
+                    startBtn.disabled = true;
+                    batchBtn.disabled = true;
+                } else {
+                    startBtn.innerHTML = '<i class="fas fa-play"></i> Start Crawling';
+                    startBtn.disabled = false;
+                    batchBtn.disabled = false;
+                }
+            }
+
+            startStatusPolling() {
+                setInterval(() => {
+                    if (this.isRunning) {
+                        this.checkStatus();
+                    }
+                }, 2000);
+            }
+
+            showAlert(message, type) {
+                const alertsContainer = document.getElementById('alertsContainer');
+                const alertId = Date.now();
+                
+                const alert = document.createElement('div');
+                alert.className = `alert alert-${type} alert-dismissible fade show`;
+                alert.innerHTML = `
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                
+                alertsContainer.appendChild(alert);
+                
+                setTimeout(() => {
+                    if (alert.parentNode) {
+                        alert.remove();
+                    }
+                }, 5000);
+            }
+        }
+
+        // Global functions
+        function toggleContent(index) {
+            const content = document.getElementById(`content-${index}`);
+            const expandBtn = content.nextElementSibling;
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                expandBtn.textContent = 'Show more';
+            } else {
+                content.classList.add('expanded');
+                expandBtn.textContent = 'Show less';
+            }
+        }
+
+        async function loadCacheFile(filename) {
+            try {
+                const response = await fetch(`/api/cache/load/${filename}`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    webCrawler.results = data.results;
+                    webCrawler.updateResults();
+                    webCrawler.updateStats({
+                        total_pages: data.total_pages,
+                        successful_pages: data.results.filter(r => r.status === 'success').length,
+                        error_pages: data.results.filter(r => r.status === 'error').length
+                    });
+                    webCrawler.showAlert(`Loaded ${data.total_pages} cached results from ${filename}`, 'success');
+                } else {
+                    webCrawler.showAlert(`Error loading cache: ${data.error}`, 'danger');
+                }
+            } catch (error) {
+                webCrawler.showAlert(`Error: ${error.message}`, 'danger');
+            }
+        }
+
+        // Initialize the application
+        const webCrawler = new WebCrawler();
+    </script>
+</body>
+</html>
+
