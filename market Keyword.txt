@@ -1,0 +1,198 @@
+Keyword,Category
+"Acquisition",Corporate Actions & M&A
+"Buyback",Corporate Actions & M&A
+"Capital increase",Corporate Actions & M&A
+"Delisting",Corporate Actions & M&A
+"Divestiture",Corporate Actions & M&A
+"Hostile takeover",Corporate Actions & M&A
+"IPO",Corporate Actions & M&A
+"Joint venture",Corporate Actions & M&A
+"Leveraged buyout (LBO)",Corporate Actions & M&A
+"Management buyout (MBO)",Corporate Actions & M&A
+"Merger",Corporate Actions & M&A
+"Reverse merger",Corporate Actions & M&A
+"Reverse stock split",Corporate Actions & M&A
+"Secondary offering",Corporate Actions & M&A
+"Share repurchase",Corporate Actions & M&A
+"Shelf registration",Corporate Actions & M&A
+"Spin-off",Corporate Actions & M&A
+"Stock split",Corporate Actions & M&A
+"Strategic alliance",Corporate Actions & M&A
+"Takeover",Corporate Actions & M&A
+"Audit",Financial & Corporate Performance
+"Bankruptcy",Financial & Corporate Performance
+"Cash flow negative",Financial & Corporate Performance
+"Cash flow positive",Financial & Corporate Performance
+"Chapter 11",Financial & Corporate Performance
+"Cost-cutting",Financial & Corporate Performance
+"Credit rating downgrade",Financial & Corporate Performance
+"Credit rating upgrade",Financial & Corporate Performance
+"Debt default",Financial & Corporate Performance
+"Debt restructuring",Financial & Corporate Performance
+"Dividend cut",Financial & Corporate Performance
+"Dividend increase",Financial & Corporate Performance
+"Earnings beat",Financial & Corporate Performance
+"Earnings miss",Financial & Corporate Performance
+"Going concern",Financial & Corporate Performance
+"Guidance lowered",Financial & Corporate Performance
+"Guidance raised",Financial & Corporate Performance
+"Insolvency",Financial & Corporate Performance
+"Liquidation",Financial & Corporate Performance
+"Liquidity crisis",Financial & Corporate Performance
+"Margins expanding",Financial & Corporate Performance
+"Margins shrinking",Financial & Corporate Performance
+"Profit margin",Financial & Corporate Performance
+"Profit warning",Financial & Corporate Performance
+"Record loss",Financial & Corporate Performance
+"Record profit",Financial & Corporate Performance
+"Revenue growth",Financial & Corporate Performance
+"Revenue warning",Financial & Corporate Performance
+"Shareholder value",Financial & Corporate Performance
+"Write-down",Financial & Corporate Performance
+"Alzheimer's",Healthcare & Biotech
+"Biologics License Application (BLA)",Healthcare & Biotech
+"Breakthrough therapy designation",Healthcare & Biotech
+"Cancer",Healthcare & Biotech
+"Clinical trial failure",Healthcare & Biotech
+"Clinical trial success",Healthcare & Biotech
+"Complete response letter",Healthcare & Biotech
+"Cure",Healthcare & Biotech
+"Drug pipeline",Healthcare & Biotech
+"Epidemic",Healthcare & Biotech
+"FDA approval",Healthcare & Biotech
+"FDA rejection",Healthcare & Biotech
+"Generic competition",Healthcare & Biotech
+"New Drug Application (NDA)",Healthcare & Biotech
+"Orphan drug status",Healthcare & Biotech
+"Pandemic",Healthcare & Biotech
+"Patent cliff",Healthcare & Biotech
+"Phase 1 trial",Healthcare & Biotech
+"Phase 2 trial",Healthcare & Biotech
+"Phase 3 failure",Healthcare & Biotech
+"Phase 3 success",Healthcare & Biotech
+"Vaccine",Healthcare & Biotech
+"Antitrust",Legal & Regulatory
+"Cartel",Legal & Regulatory
+"Class action",Legal & Regulatory
+"Compliance issue",Legal & Regulatory
+"Consent decree",Legal & Regulatory
+"DOJ investigation",Legal & Regulatory
+"Embezzlement",Legal & Regulatory
+"Fine",Legal & Regulatory
+"Forced divestiture",Legal & Regulatory
+"Indictment",Legal & Regulatory
+"Injunction",Legal & Regulatory
+"Investigation",Legal & Regulatory
+"Lawsuit",Legal & Regulatory
+"Litigation",Legal & Regulatory
+"Monopoly",Legal & Regulatory
+"Patent infringement",Legal & Regulatory
+"Penalty",Legal & Regulatory
+"Price-fixing",Legal & Regulatory
+"Product liability",Legal & Regulatory
+"Regulatory approval",Legal & Regulatory
+"Regulatory rejection",Legal & Regulatory
+"Regulatory scrutiny",Legal & Regulatory
+"SEC investigation",Legal & Regulatory
+"Settlement",Legal & Regulatory
+"Subpoena",Legal & Regulatory
+"Sue",Legal & Regulatory
+"Warning letter",Legal & Regulatory
+"Whistleblower",Legal & Regulatory
+"Consumer confidence",Macroeconomic & Geopolitical
+"Coup",Macroeconomic & Geopolitical
+"Deflation",Macroeconomic & Geopolitical
+"Demand shock",Macroeconomic & Geopolitical
+"Embargo",Macroeconomic & Geopolitical
+"Fed cut",Macroeconomic & Geopolitical
+"Fed hike",Macroeconomic & Geopolitical
+"Fiscal policy",Macroeconomic & Geopolitical
+"GDP contraction",Macroeconomic & Geopolitical
+"Geopolitical tension",Macroeconomic & Geopolitical
+"Inflation",Macroeconomic & Geopolitical
+"Interest rates",Macroeconomic & Geopolitical
+"Monetary policy",Macroeconomic & Geopolitical
+"Nationalization",Macroeconomic & Geopolitical
+"Oil price shock",Macroeconomic & Geopolitical
+"Political instability",Macroeconomic & Geopolitical
+"Quantitative easing (QE)",Macroeconomic & Geopolitical
+"Quantitative tightening (QT)",Macroeconomic & Geopolitical
+"Recession",Macroeconomic & Geopolitical
+"Sanctions",Macroeconomic & Geopolitical
+"Stagflation",Macroeconomic & Geopolitical
+"Supply shock",Macroeconomic & Geopolitical
+"Tariff",Macroeconomic & Geopolitical
+"Trade deficit",Macroeconomic & Geopolitical
+"Trade war",Macroeconomic & Geopolitical
+"Unemployment",Macroeconomic & Geopolitical
+"War",Macroeconomic & Geopolitical
+"Activist investor",Management & Governance
+"Board shakeup",Management & Governance
+"CEO resigns",Management & Governance
+"CEO steps down",Management & Governance
+"CFO resigns",Management & Governance
+"COO resigns",Management & Governance
+"Corporate governance",Management & Governance
+"Executive compensation",Management & Governance
+"Golden parachute",Management & Governance
+"Insider trading",Management & Governance
+"Layoffs",Management & Governance
+"New CEO",Management & Governance
+"Proxy fight",Management & Governance
+"Restructuring",Management & Governance
+"Scandal",Management & Governance
+"Shareholder activism",Management & Governance
+"Succession plan",Management & Governance
+"Analyst day",Market Sentiment & Analyst Actions
+"Bear market",Market Sentiment & Analyst Actions
+"Bubble",Market Sentiment & Analyst Actions
+"Bull market",Market Sentiment & Analyst Actions
+"Buy rating",Market Sentiment & Analyst Actions
+"Correction",Market Sentiment & Analyst Actions
+"Crash",Market Sentiment & Analyst Actions
+"Downgrade",Market Sentiment & Analyst Actions
+"Hedge fund",Market Sentiment & Analyst Actions
+"Hold rating",Market Sentiment & Analyst Actions
+"Market manipulation",Market Sentiment & Analyst Actions
+"Overweight",Market Sentiment & Analyst Actions
+"Ponzi scheme",Market Sentiment & Analyst Actions
+"Price target",Market Sentiment & Analyst Actions
+"Sell rating",Market Sentiment & Analyst Actions
+"Short seller report",Market Sentiment & Analyst Actions
+"Short squeeze",Market Sentiment & Analyst Actions
+"Underweight",Market Sentiment & Analyst Actions
+"Upgrade",Market Sentiment & Analyst Actions
+"Volatility",Market Sentiment & Analyst Actions
+"Whisper number",Market Sentiment & Analyst Actions
+"Backlog",Product & Operations
+"Breakthrough",Product & Operations
+"Capacity expansion",Product & Operations
+"Discovery",Product & Operations
+"Explosion",Product & Operations
+"Factory shutdown",Product & Operations
+"Force majeure",Product & Operations
+"Key supplier",Product & Operations
+"Labor dispute",Product & Operations
+"Launch",Product & Operations
+"Major contract",Product & Operations
+"New patent",Product & Operations
+"Operational efficiency",Product & Operations
+"Outage",Product & Operations
+"Patent expired",Product & Operations
+"Patent granted",Product & Operations
+"Product pipeline",Product & Operations
+"Product recall",Product & Operations
+"Production halt",Product & Operations
+"Safety concern",Product & Operations
+"Strike",Product & Operations
+"Supply chain disruption",Product & Operations
+"AI breakthrough",Technology & Security
+"Cloud migration",Technology & Security
+"Cyberattack",Technology & Security
+"Data breach",Technology & Security
+"Denial-of-service attack",Technology & Security
+"Disruptive innovation",Technology & Security
+"Hack",Technology & Security
+"Intellectual property theft",Technology & Security
+"Ransomware",Technology & Security
+"Technological obsolescence",Technology & Security
